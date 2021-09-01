@@ -8,6 +8,7 @@ interface SuggestedSectionType {
   suggestedItems: SuggestionsItemType[];
   activeIndex: number;
   topPossibleIndex: number;
+  setActiveIndex: (newIndex: number) => void;
 }
 
 const SuggestedSection: FC<SuggestedSectionType> = ({
@@ -15,6 +16,7 @@ const SuggestedSection: FC<SuggestedSectionType> = ({
   suggestedItems,
   activeIndex,
   topPossibleIndex,
+  setActiveIndex,
 }) => {
   const indexToStart = topPossibleIndex - suggestedItems.length;
 
@@ -29,6 +31,7 @@ const SuggestedSection: FC<SuggestedSectionType> = ({
         name={name}
         url={url}
         activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
       />
     );
   };

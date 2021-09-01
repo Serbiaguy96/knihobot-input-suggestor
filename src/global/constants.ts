@@ -1,5 +1,10 @@
 import { SuggestionsType } from "./types";
 
+export const ESCAPE_CODE = "Escape";
+export const ENTER_CODE = "Enter";
+export const ARROW_DOWN_CODE = "ArrowDown";
+export const ARROW_UP_CODE = "ArrowUp";
+
 export const COMMON_SUGGESTIONS: SuggestionsType = {
   "ČASTO SE HLEDÁ...": [
     {

@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
 import _reduce from "lodash/reduce";
 import { SuggestionsType } from "../../global/types";
+import { ARROW_DOWN_CODE, ARROW_UP_CODE } from "../../global/constants";
 
-const UP_ARROW = "ArrowUp";
-const DOWN_ARROW = "ArrowDown";
+// Hook, ktery se stara o uchovani informace o tom, ktera polozka z napovidace je aktivni (zabarvena)
 
 const useActiveSuggestionIndex = (inputValue: string, suggestions: SuggestionsType, isSuggestorVisible: boolean) => {
     const [activeIndex, setActiveIndex] = useState(-1);
@@ -20,13 +20,13 @@ const useActiveSuggestionIndex = (inputValue: string, suggestions: SuggestionsTy
         if (!isSuggestorVisible) return;
 
         switch(e.code) {
-            case DOWN_ARROW: {
+            case ARROW_DOWN_CODE: {
                 const indexToSet = (activeIndex + 1) % (numberOfSuggestions);
                 setActiveIndex(indexToSet);
                 return;
             }
-            case UP_ARROW: {
-                const index = activeIndex === -1 || activeIndex == 0 ? numberOfSuggestions : activeIndex;
+            case ARROW_UP_CODE: {
+                const index = activeIndex === -1 || activeIndex === 0 ? numberOfSuggestions : activeIndex;
                 const indexToSet = (index - 1);
                 setActiveIndex(indexToSet);
                 return;
@@ -41,13 +41,13 @@ const useActiveSuggestionIndex = (inputValue: string, suggestions: SuggestionsTy
         return () => {
             document.removeEventListener("keydown", handleKeyDown)
         }
-    }, [activeIndex, isSuggestorVisible])
+    }, [activeIndex, isSuggestorVisible, numberOfSuggestions])
 
     useEffect(() => {
         setActiveIndex(-1);
     }, [inputValue, suggestions])
 
-    return { activeIndex  };
+    return { activeIndex, setActiveIndex  };
 }
 
 export default useActiveSuggestionIndex;

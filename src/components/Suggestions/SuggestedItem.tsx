@@ -1,13 +1,13 @@
 import React, { FC, useEffect } from "react";
 import cn from "classnames";
-
-const ENTER = "Enter";
+import { ENTER_CODE } from "../../global/constants";
 
 interface SuggestedItemType {
   index: number;
   name: string;
   url: string;
   activeIndex: number;
+  setActiveIndex: (newIndex: number) => void;
 }
 
 const SuggestedItem: FC<SuggestedItemType> = ({
@@ -15,9 +15,10 @@ const SuggestedItem: FC<SuggestedItemType> = ({
   name,
   url,
   activeIndex,
+  setActiveIndex,
 }) => {
   const handleEnterPress = (e: KeyboardEvent) => {
-    if (e.code === ENTER && index === activeIndex) {
+    if (e.code === ENTER_CODE && index === activeIndex) {
       window.location.href = url;
     }
   };
@@ -34,7 +35,11 @@ const SuggestedItem: FC<SuggestedItemType> = ({
     "hover-over-item-container": index === activeIndex,
   });
   return (
-    <div className={divCn} key={index}>
+    <div
+      className={divCn}
+      key={index}
+      onMouseEnter={() => setActiveIndex(index)}
+    >
       <a href={url} dangerouslySetInnerHTML={{ __html: name }} />
     </div>
   );

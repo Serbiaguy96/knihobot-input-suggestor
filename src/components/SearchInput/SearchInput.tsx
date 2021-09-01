@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { Search, Clear } from "@material-ui/icons";
 
+// komponenta slouzici pro input
+
 export interface SearchInputType {
   inputValue: string;
   onChangeInputValue: (newValue: string) => void;

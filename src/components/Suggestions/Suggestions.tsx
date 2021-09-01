@@ -5,6 +5,8 @@ import SuggestedSection from "./SuggestedSection";
 import { COMMON_SUGGESTIONS } from "../../global/constants";
 import useActiveSuggestionIndex from "./useActiveSuggestionIndex";
 
+// komponenta zobrazujici napovedu
+
 interface SuggestionsComponentType {
   suggestions: SuggestionsType;
   inputValue: string;
@@ -18,7 +20,7 @@ const Suggestions: FC<SuggestionsComponentType> = ({
   onChangeInputValue,
   isSuggestorVisible,
 }) => {
-  const { activeIndex } = useActiveSuggestionIndex(
+  const { activeIndex, setActiveIndex } = useActiveSuggestionIndex(
     inputValue,
     suggestions,
     isSuggestorVisible
@@ -45,6 +47,7 @@ const Suggestions: FC<SuggestionsComponentType> = ({
           suggestedItems={suggestedItems}
           activeIndex={activeIndex}
           topPossibleIndex={maxIndex}
+          setActiveIndex={setActiveIndex}
         />
       );
     });
