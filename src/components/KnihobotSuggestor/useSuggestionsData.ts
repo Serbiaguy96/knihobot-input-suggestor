@@ -26,7 +26,8 @@ const markMatchedChars = (suggestions: SuggestionsType, inputValue: string): Sug
     return produce(notMarkedSuggestions, (draft: SuggestionsType) => {
     Object.entries(draft).forEach(([key, value]) => {
         value.forEach(({ name }, index) => {
-            draft[key][index].name = name.replace(inputValue, `<strong>${inputValue}</strong>`);
+            const regex = new RegExp(inputValue, "i");
+            draft[key][index].name = name.replace(regex, (str) => `<strong>${str}</strong>`);
         })
     })
 })
